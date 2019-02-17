@@ -1,0 +1,26 @@
+{
+  "name": "kdbx-placeholders",
+  "version": "1.1.8",
+  "description": "Resolves placeholders within KeePass KDBX files",
+  "main": "main.js",
+  "types": "main.d.ts",
+  "keywords": [],
+  "author": "Kee Vault Ltd",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "start": "tsc -v && tsc && cp package.json dist/",
+    "test": "jest",
+    "lint": "tslint '*.ts'"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.0",
+    "jest": "^22.0.0",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.5.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "kdbxweb": "^1.2.3"
+  }
+}
