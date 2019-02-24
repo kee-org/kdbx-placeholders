@@ -3,6 +3,9 @@
         "Hashcash",
         "camelize",
         "jrpc",
+        "keepass",
+        "keeweb",
         "urlsum"
-    ]
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
