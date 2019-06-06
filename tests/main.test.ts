@@ -127,7 +127,7 @@ function chgEntries () {
     return chgEntryGenerator(db2.getDefaultGroup());
 }
 
-describe("Intra-entry references", async () => {
+describe("Intra-entry references", () => {
 
     test("resolve title when Protected to unprotected text", async () => {
         expect(refService.resolveReference("{TITLE}", entry4, entries)).toEqual(entry4.fields.Title.getText());
@@ -191,7 +191,7 @@ describe("Intra-entry references", async () => {
     });
 });
 
-describe("Cross-entry references", async () => {
+describe("Cross-entry references", () => {
     test("resolve wanted title (UPPER)", async () => {
         expect(refService.resolveReference(`{REF:T@I:${UUID2h.toUpperCase()}}`, entry, entries)).toEqual(entry2.fields.Title);
     });
@@ -264,7 +264,7 @@ describe("Cross-entry references", async () => {
     // });
 });
 
-describe("checking if field has references", async () => {
+describe("checking if field has references", () => {
     test("return true if has simple reference", async () => {
         expect(refService.hasReferences("{REF:I@O:something}")).toEqual(true);
     });
@@ -276,7 +276,7 @@ describe("checking if field has references", async () => {
     });
 });
 
-describe("interpolating multiple references", async () => {
+describe("interpolating multiple references", () => {
     test("work with a simple reference", async () => {
         expect(refService.processAllReferences(3, "{TITLE}", entry, entries)).toEqual(entry.fields.Title);
     });
@@ -303,7 +303,7 @@ describe("interpolating multiple references", async () => {
     });
 });
 
-describe("changing entry's UUID ourselves", async () => {
+describe("changing entry's UUID ourselves", () => {
 
     beforeEach(() => {
         createImmutableDatabase();
@@ -361,7 +361,7 @@ describe("changing entry's UUID ourselves", async () => {
     // });
 });
 
-describe("repairing externally changed UUID", async () => {
+describe("repairing externally changed UUID", () => {
 
     beforeEach(() => {
         createImmutableDatabase();
