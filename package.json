@@ -1,6 +1,6 @@
 {
   "name": "kdbx-placeholders",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "Resolves placeholders within KeePass KDBX files",
   "main": "main.js",
   "types": "main.d.ts",
@@ -22,6 +22,6 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "kdbxweb": "1.5.8"
+    "kdbxweb": "1.7.1"
   }
 }
