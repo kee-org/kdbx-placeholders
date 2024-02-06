@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es5",
+    "target": "ES6",
     "module": "commonjs",
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
-    "strict": false,
-    "noImplicitAny": false,
+    "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "noImplicitThis": true,
+    "noImplicitAny": false,
     "alwaysStrict": false,
     "declaration": true,
     "lib": [

@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es5",
+    "target": "ES6",
     "module": "commonjs",
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "strict": false,
-    "noImplicitAny": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "noImplicitThis": true,

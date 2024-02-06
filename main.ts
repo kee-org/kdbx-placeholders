@@ -101,7 +101,7 @@ export class KdbxPlaceholders {
         const customLocalString = /^\{S:([a-zA-Z]+)\}$/.exec(referenceText);
         if (customLocalString) {
             const camelCase = camelize(customLocalString[1]);
-            return currentEntry.fields[camelCase];
+            return currentEntry.fields.get(camelCase);
         }
 
         const refString = /^\{REF:(T|U|P|A|N|I)@(T|U|P|A|N|I|O):(.+)\}$/.exec(referenceText);
@@ -184,19 +184,19 @@ export class KdbxPlaceholders {
     }
 
     private entryMatches (searchIn: string, e: KdbxEntry, text: string) {
+        const textUpper = text.toUpperCase();
         if (searchIn === "*") {
-            const customFieldMatches = Object.keys(e.fields).filter(function (key) {
-                return String(e.fields[key] || "").toUpperCase().indexOf(text.toUpperCase()) !== -1;
+            return [...e.fields.values()].some( (v) => {
+                return String(v || "").toUpperCase().indexOf(textUpper) !== -1;
             });
-            return customFieldMatches.length > 0;
         } else {
-            return String((searchIn === "uuid" ? this.uuidToHex(e.uuid) : e.fields[searchIn]) || "")
-                .toUpperCase().indexOf(text.toUpperCase()) !== -1;
+            return String((searchIn === "uuid" ? this.uuidToHex(e.uuid) : e.fields.get(searchIn)) || "")
+                .toUpperCase().indexOf(textUpper) !== -1;
         }
     }
 
     private urlPlaceholder (urlType: string, currentEntry: KdbxEntry) {
-        const urlValue = currentEntry.fields.URL;
+        const urlValue = this.keewebGetDecryptedFieldValue(currentEntry, "URL");
         if (!urlValue) return "";
         if (urlType === "RMVSCM") {
             return this.removeScheme(urlValue);
@@ -236,7 +236,7 @@ export class KdbxPlaceholders {
     }
 
     private keewebGetDecryptedFieldValue (entry: KdbxEntry, fieldName: string) {
-        const field = fieldName === "uuid" ? this.uuidToHex(entry.uuid) : entry.fields[fieldName];
+        const field = fieldName === "uuid" ? this.uuidToHex(entry.uuid) : entry.fields.get(fieldName);
         if (field === undefined || !(field instanceof ProtectedValue)) {
             return field || ""; //not an encrypted field
         }
@@ -247,10 +247,11 @@ export class KdbxPlaceholders {
         if (fieldName === "uuid") {
             entry.uuid = new KdbxUuid(newValue);
         } else {
-            if (entry.fields[fieldName] === undefined || !(entry.fields[fieldName] instanceof ProtectedValue)) {
-                entry.fields[fieldName] = newValue; //not an encrypted field
+            let fn = entry.fields.get(fieldName);
+            if (fn === undefined || !(fn instanceof ProtectedValue)) {
+                fn = newValue; //not an encrypted field
             } else {
-                entry.fields[fieldName] = ProtectedValue.fromString(newValue);
+                fn = ProtectedValue.fromString(newValue);
             }
         }
     }
